@@ -1,0 +1,35 @@
+.chats-page {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.chats-empty {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-bg);
+}
+
+.chats-empty-inner {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.chats-empty-icon { font-size: 64px; line-height: 1; }
+
+.chats-empty-inner h2 {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+.chats-empty-inner p {
+  font-size: 14px;
+  color: var(--color-text-muted);
+  max-width: 260px;
+}

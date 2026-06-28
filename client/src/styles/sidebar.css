@@ -1,0 +1,115 @@
+.sidebar {
+  width: var(--sidebar-w);
+  height: 100vh;
+  background: var(--color-surface);
+  border-right: 1px solid var(--color-border-light);
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+/* Header */
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--color-border-light);
+}
+
+.sidebar-user { display: flex; align-items: center; gap: 10px; }
+
+.sidebar-user-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.sidebar-user-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+.sidebar-user-status {
+  font-size: 11px;
+  color: var(--color-success);
+}
+
+/* Actions */
+.sidebar-actions { padding: 14px 20px 0; }
+
+/* Search */
+.sidebar-search {
+  position: relative;
+  padding: 12px 20px;
+}
+
+.sidebar-search-icon {
+  position: absolute;
+  left: 32px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-text-muted);
+  pointer-events: none;
+}
+
+.sidebar-search-input {
+  width: 100%;
+  padding: 9px 32px 9px 34px;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid var(--color-border);
+  font-family: var(--font);
+  font-size: 13px;
+  background: var(--color-bg);
+  color: var(--color-text-primary);
+  outline: none;
+  transition: border-color .18s;
+}
+
+.sidebar-search-input::placeholder { color: var(--color-text-muted); }
+.sidebar-search-input:focus { border-color: var(--color-primary); }
+
+.sidebar-search-clear {
+  position: absolute;
+  right: 28px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  font-size: 18px;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  line-height: 1;
+  padding: 0;
+}
+.sidebar-search-clear:hover { color: var(--color-text-secondary); }
+
+/* Section label */
+.sidebar-section-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: .07em;
+  padding: 0 20px 8px;
+}
+
+/* List */
+.sidebar-list {
+  flex: 1;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #e5e7eb transparent;
+}
+
+.sidebar-list::-webkit-scrollbar { width: 4px; }
+.sidebar-list::-webkit-scrollbar-thumb { background: #e5e7eb; border-radius: 4px; }
+
+.sidebar-empty {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--color-text-muted);
+  font-size: 14px;
+}
