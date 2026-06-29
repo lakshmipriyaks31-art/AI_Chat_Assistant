@@ -7,12 +7,15 @@ const chatroute = require('./app/routes/chat.routes');
 const messageroute = require('./app/routes/message.routes');
 
 const errorMiddleware = require('./middleware/errorMiddleware');
-
+const allowedOrigins = [
+  'http://localhost:3000',  // local dev
+  'https://your-frontend-url.vercel.app'  // production
+];
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors({
    credentials: true,
-   origin: 'http://localhost:3000'
+   origin: allowedOrigins
 }));
 app.use(cookieParser());
 /* -------------------- Basic route Check -------------------- */

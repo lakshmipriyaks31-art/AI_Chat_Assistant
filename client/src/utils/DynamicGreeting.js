@@ -1,4 +1,3 @@
-import React from 'react';
 
 export const DynamicGreeting = () => {
   const currentHour = new Date().getHours();
