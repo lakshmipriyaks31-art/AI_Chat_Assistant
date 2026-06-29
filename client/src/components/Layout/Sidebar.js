@@ -11,12 +11,12 @@ import '../../styles/sidebar.css';
 
 export default function Sidebar({ activeChatId, onNewChat }) {
   const { currentUser, logout } = useAuth();
-  const { chats } = useChat();
+  const { chats,activeChat } = useChat();
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
-  console.log(chats,"chatschatschats")
+  
   const { query, setQuery, filtered } = useLocalSearch(chats, 'name');
- console.log("filtered",filtered)
+ 
   const handleLogout = async() => {
     await logout();
     navigate('/login');
@@ -94,11 +94,11 @@ export default function Sidebar({ activeChatId, onNewChat }) {
           {filtered?.length === 0 && (
             <div className="sidebar-empty">No conversations found</div>
           )}
-          {(filtered||[])?.map((chat) => (
+          {chats?.map((chat) => (
             <ChatListItem
               key={chat?._id}
               chat={chat}
-              isActive={String(chat?._id) === String(activeChatId)}
+              isActive={String(chat?._id) === String(activeChat?._id)}
               onClick={() => navigate(`/chats/${chat?._id}`)}
             />
           ))}

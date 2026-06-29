@@ -15,6 +15,7 @@ exports.allchat = async(req,res) => {
 
 
 exports.particularchat = async(req,res) => {
-       let data =  await list(req?.user?._id,req?.params?.chatid,req?.data?.page)
+    
+       let data =  await list(req?.user?._id,req?.params?.chatid,req?.query?.page)
     ApiResponse.success(res,data,Message_OK,OK)
 }

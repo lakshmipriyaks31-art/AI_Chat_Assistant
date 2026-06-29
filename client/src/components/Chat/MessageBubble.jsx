@@ -3,7 +3,7 @@ import '../../styles/chatwindow.css';
 import { formatTime } from '../../utils/helpers';
 
 export default function MessageBubble({ message,Errors }) {
-  console.log(message)
+  
   const isMe = message?.role === 'user';
   
 

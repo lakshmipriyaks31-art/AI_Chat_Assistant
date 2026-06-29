@@ -64,14 +64,16 @@ const generateGemnini = async(isExist,data)=>{
       model: 'gemini-2.5-flash',
       contents: finalPrompt
     });
-    console.log(result.text)
+    
     const aiReply = result.text;
     return aiReply
 }
 
 exports.findbychatid = async({chatid,page}) => {
+
     let limit = 6,
     skip = (page-1) *limit;
+    
     let result = await messageModel.find({chatid})
                                     .select('content role updatedAt')
                                     .sort({_id:-1})

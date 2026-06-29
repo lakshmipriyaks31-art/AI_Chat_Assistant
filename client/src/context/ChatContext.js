@@ -46,7 +46,7 @@ export function ChatProvider({ children }) {
 
   const sendMessage = useCallback(
     async(chatId, text) => {
-      console.log("chatId, text",chatId, text)
+      
       if (!text.trim()) return;
       const chat = await newmessageservice(
         {
@@ -55,10 +55,11 @@ export function ChatProvider({ children }) {
           userid:currentUser?._id
         }
       )
+      
       return chat
       
     },
-    [chats,]
+    [activeChat]
   );
 
   const createChat = useCallback(
@@ -67,7 +68,7 @@ export function ChatProvider({ children }) {
       if (!topic.trim()) return null;
       const chat = await createchatroom({topic})
       setActiveChat(chat?.data);
-      console.log("chat?.data",chat?.data)
+      
       setChats([chat?.data,...chats])
       return chat?.data?._id;
     },

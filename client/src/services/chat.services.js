@@ -4,7 +4,7 @@ exports.createchatroom = async(data)=>{
       return await post([`${process.env.REACT_APP_chat}`,data]);
 }
 exports.getmessages = async(data)=>{
-      return await get([`${process.env.REACT_APP_chat}${data.chatId}`,data]
+      return await get([`${process.env.REACT_APP_chat}${data.chatId}`,{params:data}]
     );
 }
 

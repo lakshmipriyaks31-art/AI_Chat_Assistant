@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useChat } from '../context/ChatContext';
 import Sidebar from '../components/Layout/Sidebar';
@@ -9,23 +9,20 @@ export default function ConversationPage() {
   const { chatId } = useParams();
   const { chats, activeChat,  setActiveChat,selectChat, sendMessage, createChat } = useChat();
   const navigate = useNavigate();
-console.log(chatId,"sasaa",chatId == "undefined")
+
 
   useEffect(()=>{
-    console.log("come here")
-    // if(chatId == "undefined") {
-    //   return navigate('/chats',{replace:true})
-    // }
+    
      setActiveChat(chats.find(id=>id?._id===chatId))
-  },[!chatId])
+  },[!chatId,activeChat])
 
-  const handleNewChat = async(name) => {
+  const handleNewChat = useCallback(()=>async(name) => {
     const chat = await createChat(name);
     if (chat) navigate(`/chats/${chat}`);
-  };
+  },[chats,activeChat]);
 
 
-  console.log(activeChat,"__activeChat")
+  
   return (
     <div className="conversation-page">
       <Sidebar onNewChat={handleNewChat} activeChatId={activeChat?._id} />

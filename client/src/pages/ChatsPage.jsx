@@ -9,9 +9,9 @@ export default function ChatsPage() {
   const navigate = useNavigate();
 
   const handleNewChat = async(name) => {
-        console.log("coming")
+        
     const chat = await createChat(name);
-    console.log("chatchatchat",chat)
+    
     if (chat) navigate(`/chats/${chat}`);
   };
 

@@ -17,20 +17,21 @@ export default function ChatWindow({}) {
   const [Errors,setError] = useState("")
   const [page,setpage] = useState(1)
   const [openModel,setopenModel] = useState(false)
-  const {getchat,activeChat,sendMessage,chats,deleteChat} = useChat()
+  const {getchat,activeChat,sendMessage,chats,deleteChat,setActiveChat} = useChat()
   const {currentUser} = useAuth()
-  console.log("Errors____",chat)
+  
    const containerRef = useRef(null);
    
   const [hasMore, setHasMore] = useState(true);
   const [loading, setLoading] = useState(false);
 
   const handleSend = async(text) => {
+    
+    bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
     if (activeChat){
-       setchat([...chat,{content:text,role:'user',updatedAt:new Date()}])
+       setchat(prev=>[...prev,{content:text,role:'user',updatedAt:new Date()}])
        let reply =await  sendMessage(activeChat?._id, text);
-       console.log(reply?.message.error,(JSON.parse(reply?.message)?.error),"+++")
-       if(!reply?.success){ 
+        if(!reply?.success){ 
         setError(JSON.parse(reply?.message)?.error?.message)
          setchat(
                
@@ -43,48 +44,38 @@ export default function ChatWindow({}) {
         return false
        }
 
-      setchat([
-        ...chat.slice(0,chat.length-1),
-        {...chat[chat.length-1],...reply?.data?.usermsg},
-        reply?.data?.latestmessage
-
+      setchat(prev=>[
+        ...prev.slice(0,prev.length-1),
+        {...prev[chat.length-1],...reply?.data?.usermsg},
+        reply?.data?.latestMessage
       ])
-      // setchat([
-      //     ...chat.slice(0, indexToRemove),  
-      //     {...chat[indexToRemove],...reply?.data?.usermsg},
-      //     reply?.data?.latestMessage
-      // ])
-      //  setchat(
-         
-      //           [
-      //            ...chat.slice(0,chat.length-2),
-      //            {...chat[chat.length-1],...reply?.data?.usermsg},
-      //            reply?.data?.latestMessage
-      //           ]
-      //         )
     }
+    
+    bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
   
-  useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [chat?.length]);
+
 
   useEffect(()=>{
-   if(chatId) getChats()
-    setError("")
-
+   if(chatId) {
+    setActiveChat(chats.find(id=>id?._id===chatId))
+     setError("")
+    setpage(1)
+    getChats(1,"initial")
+  }
+   
   },[chatId])
 
-  const getChats = async() => {
+  const getChats = async(page,from) => {
       let result = await getchat({chatId,page})
-       console.log("result",result)
-      setchat(result)
+       
+      setchat(from==="initial"?result:prev=>[...result,...prev])
   }
 
 
     // Fetch older records on scroll up
   const loadMoreMessages = async () => {
-    console.log("loading || !hasMore || chat.length === 0",loading , !hasMore , chat.length )
+    
     if (loading || !hasMore || chat.length === 0) return;
     setLoading(true);
 
@@ -95,18 +86,15 @@ export default function ChatWindow({}) {
     const previousScrollHeight = container.scrollHeight;
 
     try {
-      const res = await getChats();
-      console.log("res",res)
+      const res = await getChats(page+1);
+      
       if (res?.length === 0) {
         setHasMore(false);
         setLoading(false);
         return;
       }
 
-      // Prepend the new older items to the state
-      // setchat((prev) => [...res, ...prev]);
-      setpage(page++)
-      // Adjust scroll position after DOM updates
+      setpage(page+1)
       setTimeout(() => {
         if (container) {
           const newScrollHeight = container.scrollHeight;
@@ -127,7 +115,7 @@ export default function ChatWindow({}) {
     
     // Check if user scrolled to the absolute top
     if (containerRef.current.scrollTop === 0) {
-      loadMoreMessages();
+      loadMoreMessages(page);
     }
   };
 

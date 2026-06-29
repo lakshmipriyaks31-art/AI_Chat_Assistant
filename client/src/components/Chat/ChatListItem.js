@@ -16,7 +16,7 @@ export default function ChatListItem({ chat, isActive, onClick }) {
       <div className="chat-list-info">
        
         <div className="chat-list-row">
-          <span className="chat-list-preview">{chat?.latestmessage?.content || chat.topic}</span>
+          <span className="chat-list-preview">{chat.topic}</span>
             <span className="chat-list-badge">{formatDate(chat.updatedAt)}</span>
         </div>
       </div>

@@ -25,7 +25,7 @@ export default function MessageInput({ chatId,onSend }) {
       handleSend();
     }
   };
-console.log("loading",loading)
+
   return (
     <div className="message-input-bar">
       {/* <button className="btn-icon" aria-label="Attach file">
