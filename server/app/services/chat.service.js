@@ -6,7 +6,7 @@ const messageModel = require("../model/message.model")
 const { findbychatid } = require("./message.service")
 
 exports.findbyid = async(_id)=>{
-    return await chatModel.findOne({userid:_id})
+    return await chatModel.findOne({userid:_id,deleted:0})
 }
 exports.addService = async(data)=>{
     // let isExist = await this.findbyid(data)
@@ -23,6 +23,7 @@ exports.list = async(userid,chatid,page) => {
 
 exports.findbyuserid = async(userid) => {
     let result = await chatModel.find({userid,
+                                deleted:0
                                 // latestmessage: { $exists: true, $ne: null }
                                 })
                                 .select('-createdAt')
@@ -39,9 +40,18 @@ exports.findbyuserid = async(userid) => {
 
 exports.updateLatestMessage = async({_id,latestmessage}) => {
     return  await chatModel.findOneAndUpdate(
-                {_id},
+                {_id,deleted:0},
                 {$set:{latestmessage}},
                 {new:true}
             )
                         
+}
+
+
+exports.deletechat = async({userid,chatid}) => {
+       return  await chatModel.findOneAndUpdate(
+                {_id:chatid},
+                {$set:{deleted:1}},
+                {upsert:true}
+            )
 }

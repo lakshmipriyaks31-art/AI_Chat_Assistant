@@ -20,7 +20,8 @@ const errorMessage = {
   Message_MOBILE_NOT_EXIST:`Mobile Number is not Exist`,
   Message_Wrong_Password:"Password is incorrect",
   Message_USER_Not_Found:"User Not Found",
-  Message_Logout:"Logout successfully"
+  Message_Logout:"Logout successfully",
+  Message_Delete:"Deleted Successfully"
 };
 
 module.exports = errorMessage;
