@@ -14,6 +14,7 @@ const allowedOrigins = [
 ];
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.enable('trust proxy'); 
 app.use(cors({
    credentials: true,
    origin: allowedOrigins
