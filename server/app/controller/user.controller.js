@@ -35,7 +35,7 @@ exports.Register = async(req,res) => {
         secure: true, // true in production
         //domain: "https://ai-chat-assistant-kslp.vercel.app/",
         sameSite: "none",
-        maxAge: 7 * 24 * secure: true,60 * 60 * 1000
+        maxAge: 7 * 24 * 60 * 60 * 1000
     });
     ApiResponse.success(res, currentuser,Message_CREATED, CREATED);
 
