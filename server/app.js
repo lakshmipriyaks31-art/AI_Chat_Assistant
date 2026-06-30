@@ -9,7 +9,8 @@ const messageroute = require('./app/routes/message.routes');
 const errorMiddleware = require('./middleware/errorMiddleware');
 const allowedOrigins = [
   'http://localhost:3000',  // local dev
-  'https://ai-chat-assistant-7k2s4bwxl-kslp.vercel.app/'  // production
+  'https://ai-chat-assistant-kslp.vercel.app',
+  'https://ai-chat-assistant-7k2s4bwxl-kslp.vercel.app'  // production
 ];
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
