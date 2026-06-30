@@ -32,10 +32,10 @@ exports.Register = async(req,res) => {
     })
     res.cookie("refreshToken", refreshtoken, {
         httpOnly: true,
-        secure: false, // true in production
+        secure: true, // true in production
         //domain: "https://ai-chat-assistant-kslp.vercel.app/",
         sameSite: "none",
-        maxAge: 7 * 24 * 60 * 60 * 1000
+        maxAge: 7 * 24 * secure: true,60 * 60 * 1000
     });
     ApiResponse.success(res, currentuser,Message_CREATED, CREATED);
 
@@ -51,7 +51,7 @@ exports.Login = async(req,res) => {
     })
     res.cookie("refreshToken", refreshtoken, {
         httpOnly: true,
-        secure: false, // true in production
+        secure: true, // true in production
         sameSite: "none",
         //domain: "https://ai-chat-assistant-kslp.vercel.app/",
         maxAge: 7 * 24 * 60 * 60 * 1000
@@ -70,7 +70,7 @@ exports.logout = async(req,res) => {
     })
     res.clearCookie("refreshToken", {
         httpOnly: true,
-        secure: false, // true in production
+        secure: true, // true in production
         sameSite: "none",
         //domain: "https://ai-chat-assistant-kslp.vercel.app/",
     });
