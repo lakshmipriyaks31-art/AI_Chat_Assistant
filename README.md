@@ -318,17 +318,6 @@ npm start
 
 ---
 
-# 📷 Screenshots
-
-
-- Login
-- Register
-- Home
-- AI Chat
-- Chat History
-- Mobile View
-
----
 
 # 👨‍💻 Author
 
@@ -338,7 +327,7 @@ Software Engineer
 
 GitHub: https://github.com/lakshmipriyaks31-art
 
-LinkedIn: https://linkedin.com/in/kslp
+LinkedIn: https://www.linkedin.com/in/kslp31/
 
 ---
 
