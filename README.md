@@ -323,7 +323,7 @@ npm start
 
 **K S Lakshmi Priya**
 
-Software Engineer
+Senior Software Developer
 
 GitHub: https://github.com/lakshmipriyaks31-art
 
